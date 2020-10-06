@@ -57,7 +57,7 @@ def image_resize(img, width=None, height=None, inter=cv2.INTER_AREA):
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description='tf-pose-estimation realtime webcam')
-  parser.add_argument('--src', type=int, default=0, help='Video path or camera source like 0,1,2')
+  parser.add_argument('--src', type=str, default='A3.mp4', help='Video path or camera source like 0,1,2')
 
   parser.add_argument('--resize', type=str, default='0x0',
                       help='if provided, resize images before they are processed. default=0x0, Recommends : 432x368 or 656x368 or 1312x736 ')
@@ -93,7 +93,7 @@ if __name__ == '__main__':
     logger.debug('image process+')
     humans = e.inference(image, resize_to_default=(w > 0 and h > 0), upsample_size=args.resize_out_ratio)
 
-    logger.debug('postprocess+', humans)
+    logger.debug('postprocess+')
     image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False, thikness=args.thickness)
 
     cv2.putText(image,
